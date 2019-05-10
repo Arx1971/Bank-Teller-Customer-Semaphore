@@ -6,41 +6,27 @@ public class Teller {
 
 	private Semaphore TellerSemaphore;
 	private Random_Int_Mean random_int_mean;
-	private Driver driver;
+	private Bank bank;
 	private static List<Integer> averagewaitingtime;
 
-	public Teller(Driver driver) {
-		this.driver = driver;
-		TellerSemaphore = new Semaphore(driver.getNumberOfTellers(), true);
+	public Teller(Bank bank) {
+		this.bank = bank;
+		TellerSemaphore = new Semaphore(bank.getNumberOfTellers(), true);
 		random_int_mean = new Random_Int_Mean();
 		averagewaitingtime = new ArrayList<Integer>();
 	}
 
-	public void serveCustomer(Customer customer) {
-		try {
-
-			TellerSemaphore.acquire();
-
-			customer.printMessage("starts being served");
-
-			try {
-				int waittime = servicetime();
-				Thread.sleep(waittime);
-				averagewaitingtime.add(waittime);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			TellerSemaphore.release();
-		}
-
+	public void tellerSimulator(Bank bank) throws InterruptedException {
+		TellerSemaphore.acquire();
+		bank.printMessage("starts being served");
+		int waittime = servicetime();
+		Thread.sleep(waittime);
+		averagewaitingtime.add(waittime);
+		TellerSemaphore.release();
 	}
 
 	private synchronized int servicetime() {
-		return random_int_mean.random_int(driver.getMeanServiceTime() / 10) * 1000;
+		return random_int_mean.random_int(bank.getMeanServiceTime() / 10) * 1000;
 	}
 
 	public static double getAveragewaitingtime() {
@@ -49,7 +35,6 @@ public class Teller {
 			sum += averagewaitingtime.get(i);
 
 		return (sum * 0.001) / averagewaitingtime.size();
-
 	}
 
 }

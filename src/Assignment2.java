@@ -1,7 +1,8 @@
 public class Assignment2 {
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws InterruptedException {
 
-		Driver driver = new Driver(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
+		Bank bank = new Bank(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
 				Integer.parseInt(args[3]));
 
 		System.out.println("Mean inter-arrival time: " + Integer.parseInt(args[0]));
@@ -9,8 +10,10 @@ public class Assignment2 {
 		System.out.println("Number of tellers: " + Integer.parseInt(args[2]));
 		System.out.println("Length of simulation: " + Integer.parseInt(args[3]) + "\n");
 
-		Thread customerGeneratorThread = new Thread(new CustomerGenerator(driver));
-		customerGeneratorThread.start();
+		Thread simulator = new Thread(new Customer(bank));
+		simulator.start();
+		
+		simulator.join();
 
 	}
 }
