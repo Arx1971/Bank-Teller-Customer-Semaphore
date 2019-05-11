@@ -1,4 +1,4 @@
-#Bank Teller Simulator
+# Bank Teller Simulator
 
 One interesting class of applications of concurrent programming is simulation, in which a program simulates a
 real-world system by using individual threads to simulate its individual components. For this project, we will be
@@ -34,7 +34,7 @@ an acquire() on this semaphore will be able to proceed without delay.
 finishes being served, he/she will do a release(), allowing another customer to pass the semaphore and use
 the teller.
 
-#Customer Thread Insturction
+# Customer Thread Insturction
 Get next available customer number.
  Report arrival and save arrival time.
  Get in line (i.e., wait on semaphore.)
@@ -45,16 +45,16 @@ Get next available customer number.
  Update global statistics.
  Exit.
 
-#Sample Input: 
+# Sample Input: 
 The output of a sample run of the program:
 Mean inter-arrival time: 10
 Mean service time: 30
 Number of tellers: 3
 Length of simulation: 70
 
-#Sample Output
+# Sample Output
 
-At Time 	10, Customer 	1 arrives in line
+At Time 	10, Customer 	1 arrives in line\
 At Time 	10, Customer 	1 starts being served
 At Time 	20, Customer 	2 arrives in line
 At Time 	20, Customer 	1 leaves the bank
