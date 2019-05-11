@@ -1,22 +1,22 @@
-import java.util.LinkedList;
-import java.util.Queue;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Customer implements Runnable {
 
-	private static int customerCounter;
-	private Queue<Thread> customersQueue;
+	private static int customerCounter = 0;
+	private static BlockingQueue<Thread> customersQueue = new LinkedBlockingQueue<Thread>();
+	private static long startTime = System.currentTimeMillis();
+	
 	private Bank bank;
 	private Teller teller;
-	private Random_Int_Mean random_int_mean;
-	public static long startTime;
+	private Random_Int_Mean randomIntMean;
+	
 
 	public Customer(Bank bank) {
 		this.bank = bank;
-		startTime = System.currentTimeMillis();
-		this.teller = new Teller(bank);
-		customersQueue = new LinkedList<Thread>();
-		random_int_mean = new Random_Int_Mean();
-		customerCounter = 0;
+		teller = new Teller(bank);
+		randomIntMean = new Random_Int_Mean();
 	}
 
 	public static int getStartTime() {
@@ -24,23 +24,19 @@ public class Customer implements Runnable {
 	}
 
 	private int arrivalTime() {
-		return random_int_mean.random_int(bank.getmeanInterArrivalTime() / 10) * 1000;
+		return randomIntMean.random_int(bank.getmeanInterArrivalTime() / 10) * 1000;
 	}
 
 	public void customerSimulator() throws InterruptedException {
 		while (true) {
-			try {
-				Thread.sleep(arrivalTime());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			Thread customerThread = new Thread(new Bank(++customerCounter, teller));
-			customersQueue.add(customerThread);
-			customerThread.start();
+			Thread.sleep(arrivalTime());
+
+			Thread thread = new Thread(new Bank(++customerCounter, teller));
+			customersQueue.add(thread);
+			thread.start();
 
 			if (bank.getlengthOfSimulation() < (System.currentTimeMillis() - startTime) / 100)
 				break;
-
 		}
 
 		while (!customersQueue.isEmpty()) {
@@ -50,7 +46,7 @@ public class Customer implements Runnable {
 					continue;
 				} else {
 					thread.join();
-					customersQueue.remove();
+					customersQueue.poll();
 					break;
 				}
 			}

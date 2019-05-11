@@ -1,12 +1,12 @@
 public class Bank implements Runnable {
-	
+
 	private int id;
 	private Teller teller;
 	private int meanInterArrivalTime;
 	private int meanServiceTime;
 	private int numberOfTellers;
 	private int lengthOfSimulation;
-
+	
 	public Bank(int id, Teller teller) {
 		this.id = id;
 		this.teller = teller;
