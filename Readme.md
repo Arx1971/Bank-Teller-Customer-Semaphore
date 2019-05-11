@@ -35,48 +35,48 @@ finishes being served, he/she will do a release(), allowing another customer to 
 the teller.
 
 # Customer Thread Insturction
-Get next available customer number.
- Report arrival and save arrival time.
- Get in line (i.e., wait on semaphore.)
- Done waiting; calculate waiting time.
- Report starting to be served.
- Sleep() a random amount of time, based on service time mean.
- Report leaving the bank.
- Update global statistics.
- Exit.
+Get next available customer number.\
+ Report arrival and save arrival time.\
+ Get in line (i.e., wait on semaphore.)\
+ Done waiting; calculate waiting time.\
+ Report starting to be served.\
+ Sleep() a random amount of time, based on service time mean.\
+ Report leaving the bank.\
+ Update global statistics.\
+ Exit.\
 
 # Sample Input: 
-The output of a sample run of the program:
-Mean inter-arrival time: 10
-Mean service time: 30
-Number of tellers: 3
-Length of simulation: 70
+The output of a sample run of the program:\
+Mean inter-arrival time: 10\
+Mean service time: 30\
+Number of tellers: 3\
+Length of simulation: 70\
 
 # Sample Output
 
 At Time 	10, Customer 	1 arrives in line\
-At Time 	10, Customer 	1 starts being served
-At Time 	20, Customer 	2 arrives in line
-At Time 	20, Customer 	1 leaves the bank
-At Time 	20, Customer 	2 starts being served
-At Time 	30, Customer 	3 arrives in line
-At Time 	30, Customer 	3 starts being served
-At Time 	40, Customer 	2 leaves the bank
-At Time 	40, Customer 	4 arrives in line
-At Time 	40, Customer 	4 starts being served
-At Time 	60, Customer 	4 leaves the bank
-At Time 	60, Customer 	5 arrives in line
-At Time 	60, Customer 	5 starts being served
-At Time 	70, Customer 	3 leaves the bank
-At Time 	70, Customer 	6 arrives in line
-At Time 	70, Customer 	6 starts being served
-At Time 	80, Customer 	7 arrives in line
-At Time 	80, Customer 	7 starts being served
-At Time 	90, Customer 	6 leaves the bank
-At Time 	100, Customer 	7 leaves the bank
-At Time 	150, Customer 	5 leaves the bank
+At Time 	10, Customer 	1 starts being served\
+At Time 	20, Customer 	2 arrives in line\
+At Time 	20, Customer 	1 leaves the bank\
+At Time 	20, Customer 	2 starts being served\
+At Time 	30, Customer 	3 arrives in line\
+At Time 	30, Customer 	3 starts being served\
+At Time 	40, Customer 	2 leaves the bank\
+At Time 	40, Customer 	4 arrives in line\
+At Time 	40, Customer 	4 starts being served\
+At Time 	60, Customer 	4 leaves the bank\
+At Time 	60, Customer 	5 arrives in line\
+At Time 	60, Customer 	5 starts being served\
+At Time 	70, Customer 	3 leaves the bank\
+At Time 	70, Customer 	6 arrives in line\
+At Time 	70, Customer 	6 starts being served\
+At Time 	80, Customer 	7 arrives in line\
+At Time 	80, Customer 	7 starts being served\
+At Time 	90, Customer 	6 leaves the bank\
+At Time 	100, Customer 	7 leaves the bank\
+At Time 	150, Customer 	5 leaves the bank\
 
-Simulation terminated after 7 customers served
+Simulation terminated after 7 customers served\
 Average waiting time = 3.14
 
 
