@@ -47,6 +47,7 @@ public class Customer implements Runnable {
 				} else {
 					thread.join();
 					customersQueue.poll();
+					
 					break;
 				}
 			}

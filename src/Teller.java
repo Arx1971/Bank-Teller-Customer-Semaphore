@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
-public class Teller implements Runnable{
+public class Teller implements Runnable {
 
 	private Semaphore TellerSemaphore;
 	private Random_Int_Mean randomIntMean;
@@ -16,15 +16,15 @@ public class Teller implements Runnable{
 		averagewaitingtime = new ArrayList<Integer>();
 	}
 
-	public void tellerSimulator(Bank bank) throws InterruptedException {
+	public synchronized void tellerSimulator(Bank bank) throws InterruptedException {
 		TellerSemaphore.acquire();
-		bank.printMessage("starts being served");
+		bank.display("starts being served");
 		int waittime = servicetime();
 		Thread.sleep(waittime);
 		averagewaitingtime.add(waittime);
 		TellerSemaphore.release();
 	}
-	
+
 	@Override
 	public void run() {
 		try {
@@ -33,7 +33,7 @@ public class Teller implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private synchronized int servicetime() {
 		return randomIntMean.random_int(bank.getMeanServiceTime() / 10) * 1000;
 	}
