@@ -14,6 +14,5 @@ public class Assignment2 {
 		Thread simulator = new Thread(new Customer(bank));
 		simulator.start();
 		simulator.join();
-
 	}
 }

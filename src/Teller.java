@@ -4,25 +4,25 @@ import java.util.concurrent.Semaphore;
 
 public class Teller implements Runnable {
 
-	private Semaphore TellerSemaphore;
+	private Semaphore tellerSemaphore;
 	private Random_Int_Mean randomIntMean;
 	private Bank bank;
-	private static List<Integer> averagewaitingtime;
+	private static List<Integer> averageWaitingTime;
 
 	public Teller(Bank bank) {
 		this.bank = bank;
-		TellerSemaphore = new Semaphore(bank.getNumberOfTellers(), true);
+		tellerSemaphore = new Semaphore(bank.getNumberOfTellers(), true);
 		randomIntMean = new Random_Int_Mean();
-		averagewaitingtime = new ArrayList<Integer>();
+		averageWaitingTime = new ArrayList<Integer>();
 	}
 
 	public synchronized void tellerSimulator(Bank bank) throws InterruptedException {
-		TellerSemaphore.acquire();
+		tellerSemaphore.acquire();
 		bank.display("starts being served");
 		int waittime = servicetime();
 		Thread.sleep(waittime);
-		averagewaitingtime.add(waittime);
-		TellerSemaphore.release();
+		averageWaitingTime.add(waittime);
+		tellerSemaphore.release();
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class Teller implements Runnable {
 		return randomIntMean.random_int(bank.getMeanServiceTime() / 10) * 1000;
 	}
 
-	public static double getAveragewaitingtime() {
+	public synchronized static double getAveragewaitingtime() {
 		int sum = 0;
-		for (int i = 0; i < averagewaitingtime.size(); i++)
-			sum += averagewaitingtime.get(i);
+		for (int i = 0; i < averageWaitingTime.size(); i++)
+			sum += averageWaitingTime.get(i);
 
-		return (sum * 0.001) / averagewaitingtime.size();
+		return (sum * 0.001) / averageWaitingTime.size();
 	}
 
 }

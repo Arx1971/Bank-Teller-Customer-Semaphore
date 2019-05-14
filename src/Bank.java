@@ -1,14 +1,12 @@
 public class Bank implements Runnable {
 
-	private int custID;
 	private Teller teller;
 	private int meanInterArrivalTime;
 	private int meanServiceTime;
 	private int numberOfTellers;
 	private int lengthOfSimulation;
 
-	public Bank(int custID, Teller teller) {
-		this.custID = custID;
+	public Bank(Teller teller) {
 		this.teller = teller;
 	}
 
@@ -52,14 +50,15 @@ public class Bank implements Runnable {
 	}
 
 	public void display(String str) {
-		System.out.println("At Time \t" + Customer.getStartTime() + ", Customer \t" + custID + " " + str);
+		System.out.println("At Time \t" + Customer.getStartTime() + ", Customer \t" + Thread.currentThread().getName()
+				+ " " + str);
 	}
 
 	@Override
 	public void run() {
 		display("arrives in line");
 		try {
-			teller.tellerSimulator(new Bank(custID, teller));
+			teller.tellerSimulator(new Bank(teller));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
