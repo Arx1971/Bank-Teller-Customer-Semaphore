@@ -1,4 +1,10 @@
-public class Bank implements Runnable {
+/**
+ * @ Adnan Rahin
+ *
+ *
+ **/
+
+public class Bank extends Thread {
 
 	private Teller teller;
 	private int meanInterArrivalTime;
@@ -56,12 +62,14 @@ public class Bank implements Runnable {
 
 	@Override
 	public void run() {
-		display("arrives in line");
+		System.out.println("At Time \t" + Customer.getStartTime() + ", Customer \t" + Thread.currentThread().getName()
+				+ " " + "arrives the bank");
 		try {
 			teller.tellerSimulator(new Bank(teller));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		display("leaves the bank");
+		System.out.println("At Time \t" + Customer.getStartTime() + ", Customer \t" + Thread.currentThread().getName()
+				+ " " + "leaves the bank");
 	}
 }

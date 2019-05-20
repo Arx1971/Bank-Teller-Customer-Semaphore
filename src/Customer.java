@@ -1,7 +1,13 @@
+/**
+ * @ Adnan Rahin
+ *
+ *
+ **/
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Customer implements Runnable {
+public class Customer extends Thread {
 
 	private static BlockingQueue<Thread> customersQueue = new LinkedBlockingQueue<Thread>();
 	private static long startTime = System.currentTimeMillis();
@@ -38,13 +44,13 @@ public class Customer implements Runnable {
 		}
 
 		while (!customersQueue.isEmpty()) {
-			while (true) {
-				Thread thread = customersQueue.peek();
-				if (!thread.isAlive()) {
-					thread.join();
-					customersQueue.poll();
-					break;
-				}
+			
+			Thread thread = customersQueue.peek();
+			
+			if (!thread.isAlive()) {
+				thread.join();
+				customersQueue.poll();
+
 			}
 		}
 		System.out.println();

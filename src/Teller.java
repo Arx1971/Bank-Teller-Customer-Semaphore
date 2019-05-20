@@ -1,8 +1,15 @@
+
+/**
+ * @ Adnan Rahin
+ *
+ *
+ **/
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
-public class Teller implements Runnable {
+public class Teller extends Thread {
 
 	private Semaphore tellerSemaphore;
 	private Random_Int_Mean randomIntMean;
@@ -18,7 +25,8 @@ public class Teller implements Runnable {
 
 	public synchronized void tellerSimulator(Bank bank) throws InterruptedException {
 		tellerSemaphore.acquire();
-		bank.display("starts being served");
+		System.out.println("At Time \t" + Customer.getStartTime() + ", Customer \t" + Thread.currentThread().getName()
+				+ " " + "starts being served");
 		int waittime = servicetime();
 		Thread.sleep(waittime);
 		averageWaitingTime.add(waittime);
