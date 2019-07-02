@@ -5,16 +5,15 @@
  **/
 
 public class Assignment2 {
-	
+
 	public static void main(String[] args) throws InterruptedException {
 
-		Bank bank = new Bank(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
-				Integer.parseInt(args[3]));
+		Bank bank = new Bank(10, 30, 3, 70);
 
-		System.out.println("Mean inter-arrival time: " + Integer.parseInt(args[0]));
-		System.out.println("Mean service time: " + Integer.parseInt(args[1]));
-		System.out.println("Number of tellers: " + Integer.parseInt(args[2]));
-		System.out.println("Length of simulation: " + Integer.parseInt(args[3]));
+		System.out.println("Mean inter-arrival time: " + 10);
+		System.out.println("Mean service time: " + 30);
+		System.out.println("Number of tellers: " + 3);
+		System.out.println("Length of simulation: " + 70);
 		System.out.println();
 
 		Thread simulator = new Thread(new Customer(bank));
